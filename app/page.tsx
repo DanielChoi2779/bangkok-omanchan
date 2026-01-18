@@ -1,41 +1,28 @@
-<ul>
-  {restaurants.map((r: {
-    id: number;
-    name: string;
-    area: string;
-    note: string;
-  }) => (
-    <li key={r.id}>
-      <strong>{r.name}</strong> ({r.area}) – {r.note}
-    </li>
-  ))}
-</ul>
+import FilterClient from "./ui/FilterClient";
+
+type Restaurant = {
+  id: number;
+  name: string;
+  area: string;
+  note: string;
+  mapUrl?: string;
+  tags?: string[];
+};
 
 async function getRestaurants(): Promise<Restaurant[]> {
   const res = await fetch("/api/restaurants", { cache: "no-store" });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch restaurants");
-  }
-
-  return res.json() as Promise<Restaurant[]>;
+  return (await res.json()) as Restaurant[];
 }
 
 export default async function Home() {
-  const restaurants: Restaurant[] = await getRestaurants();
+  const restaurants = await getRestaurants();
 
   return (
-    <main style={{ padding: 40 }}>
+    <main style={{ padding: 40, maxWidth: 900, margin: "0 auto" }}>
       <h1>방콕 오만찬 🍜</h1>
       <p>로그인 없이 보는 방콕 직장인 맛집 리스트</p>
 
-      <ul>
-        {restaurants.map((r: Restaurant) => (
-          <li key={r.id}>
-            <strong>{r.name}</strong> ({r.area}) – {r.note}
-          </li>
-        ))}
-      </ul>
+      <FilterClient restaurants={restaurants} />
     </main>
   );
 }
