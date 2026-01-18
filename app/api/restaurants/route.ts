@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "../../../lib/supabaseClient";
 
 export async function GET() {
   const { data, error } = await supabase
     .from("restaurants")
-    .select("id,name,area,category,map_url")
+    .select("id,name,area,category,map_url,created_at")
     .order("created_at", { ascending: false });
 
   if (error) {
