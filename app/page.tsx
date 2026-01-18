@@ -22,7 +22,7 @@ async function getRestaurants(): Promise<Restaurant[]> {
 }
 
 export default async function Home() {
-  const restaurants = await getRestaurants();
+  const restaurants: Restaurant[] = await getRestaurants();
 
   return (
     <main style={{ padding: 40 }}>
