@@ -5,16 +5,14 @@ type Restaurant = {
   note: string;
 };
 
-async function getRestaurants() {
-  const res = await fetch("http://localhost:3000/api/restaurants", {
-    cache: "no-store",
-  });
+async function getRestaurants(): Promise<Restaurant[]> {
+  const res = await fetch("/api/restaurants", { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch restaurants");
   }
 
-  return res.json();
+  return res.json() as Promise<Restaurant[]>;
 }
 
 export default async function Home() {
