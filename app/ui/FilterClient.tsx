@@ -1,10 +1,9 @@
-"use client";
-
 type Restaurant = {
   id: number;
   name: string;
   area: string;
-  note: string;
+  category: string;
+  mapUrl: string;
 };
 
 export default function FilterClient({
@@ -16,7 +15,11 @@ export default function FilterClient({
     <ul>
       {restaurants.map((r) => (
         <li key={r.id}>
-          <strong>{r.name}</strong> ({r.area}) - {r.note}
+          <strong>{r.name}</strong> ({r.area}) · {r.category}
+          <br />
+          <a href={r.mapUrl} target="_blank">
+            지도 보기
+          </a>
         </li>
       ))}
     </ul>
