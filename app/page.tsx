@@ -26,7 +26,7 @@ export default async function Home() {
       <p>로그인 없이 보는 방콕 직장인 맛집 리스트</p>
 
       <ul>
-        {restaurants.map((r) => (
+        {restaurants.map((r: Restaurant) => (
           <li key={r.id}>
             <strong>{r.name}</strong> ({r.area}) – {r.note}
           </li>
