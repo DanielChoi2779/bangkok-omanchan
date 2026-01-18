@@ -1,9 +1,15 @@
-type Restaurant = {
-  id: number;
-  name: string;
-  area: string;
-  note: string;
-};
+<ul>
+  {restaurants.map((r: {
+    id: number;
+    name: string;
+    area: string;
+    note: string;
+  }) => (
+    <li key={r.id}>
+      <strong>{r.name}</strong> ({r.area}) – {r.note}
+    </li>
+  ))}
+</ul>
 
 async function getRestaurants(): Promise<Restaurant[]> {
   const res = await fetch("/api/restaurants", { cache: "no-store" });
